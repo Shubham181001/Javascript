@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type = "text/javascript">
+        //Here Date() is the constructor, which loads the current date and time.
+        let manufactured = new Date();
+        document.write(manufactured + "<br>");
+        //We can specify any specific date as parameter in the Date constructor in the YYYY-MM-DD format.
+        // We can also specify the time after specifying date. Format for specifying time is HH:MM:SS
+        let manufacture = new Date("2022-01-22 16:34:21");
+        document.write(manufacture + "<br>");
+        // There are Various Date methods which can be used to extract data from the date. Which are as follows - 
+        // getHours()             0 - 23
+        // getMinutes()           0 - 59 
+        // getSeconds()           0 - 59 
+        // getMilliSeconds()      0 - 99
+        // getDay()               weekday number 0 = Sunday
+        // getDate()              1 - 31(max)
+        // getMonth()             Month number 0 = January
+        // getFullYear()          Year number 2023
+        // toLocaleDateString()   Short Date
+        // toLocaleTimeString()   Short Time
+        // All methods return numbers
+        // So for accessing the name of days and the months we create array for them for accessing the associated day and month name.
+
+        let days = ["Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"];
+
+        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        document.write(`
+          Weekday : ${days[manufactured.getDay()]} <br>
+          Month : ${months[manufactured.getMonth()]} <br>
+          Date : ${manufactured.getDate()} <br>
+          Year : ${manufactured.getFullYear()} <br>
+          Date : ${manufactured.getDate()} ${months[manufactured.getMonth()]},${manufactured.getFullYear()}
+        `)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

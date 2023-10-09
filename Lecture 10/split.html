@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split</title>
+    <script type = "text/javascript">
+        var contacts = "John: 998448471, David: 999958482";
+        var [john, david] = contacts.split(','); // This is called variable destructuring technique.
+        document.write(john + "<br>" + david);
+
+        //This is new Technique introduced at the later versions of the Javascript.
+        // Before that people used to do it like this way which is mentioned below - 
+        var results = contacts.split(',');
+        // Because it splits the string into two parts and those two different strings are stored in two blocks and hence an array is created having two blocks of memory, so 1st string can be accessed by 0th index and 2nd string can be accessed by 1st index.
+        var joh = results[0];
+        var dav = results[1];
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

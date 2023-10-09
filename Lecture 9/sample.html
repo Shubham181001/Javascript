@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample</title>
+    <script type = "text/javascript">
+        var message = "Welcome to Javascript";
+        document.write(message.slice(0)); // From start index 0 til the string ends. 
+        //End Index must be greater than that of start index.
+        // prints characters from start index to end index - 1;
+
+        document.write(message.substr(0, 7));
+        // substr doesn't have any end index the value written at the place of end index is actually not an end index. It specifies the number of characters that need to be printed starting from the start index.
+        // If not specified that how many characters have to be printed then it simply starts from the start index and prints till the end of the string.
+
+        // Both substr and slice can't read the characters both side i.e. backward and forward they only read the characters in forward direction.
+
+        // substring is same as slice but it has an additional ability of reading the characters in both direction i.e. forward and backward.
+        // It has start index and as well as end index.
+        // Lower number becomes the start index and the higher number becomes end index.
+        // And prints exactly like slice from start index to end index - 1;
+
+        document.write(message.substring(7, 0));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array Manipulation</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <script type="text/javascript">
+      const products = [];
+      let product = {};
+      function LoadProducts() {
+        document.querySelector("tbody").innerHTML = "";
+        for (item of products) {
+          let tRow = document.createElement("tr");
+          let tName = document.createElement("td");
+          let tPrice = document.createElement("td");
+          let tCity = document.createElement("td");
+          let tDetails = document.createElement("td");
+          let tDelete = document.createElement("td");
+
+          tName.innerHTML = item.Name;
+          tPrice.innerHTML = item.Price;
+          tCity.innerHTML = item.City;
+
+          let btnDetails = document.createElement("button");
+          let btnDelete = document.createElement("button");
+
+          btnDetails.innerHTML = `
+                <span class = "bi bi-eye"></span>
+                `;
+          btnDetails.className = "btn btn-info";
+
+          btnDelete.innerHTML = `
+                <span class = "bi bi-trash"></span>
+                `;
+
+          btnDelete.className = "btn btn-danger";
+          btnDetails.setAttribute("data-bs-toggle", "modal");
+          btnDetails.setAttribute("data-bs-target", "#detailsModal");
+
+          tDetails.appendChild(btnDetails);
+          tDelete.appendChild(btnDelete);
+
+          btnDetails.onclick = function () {
+            // Presenting all the details in the tabular format
+            // let tr = document.createElement("tr");
+            // let tdName = document.createElement("td");
+            // let tdPrice = document.createElement("td");
+            // let tdCity = document.createElement("td");
+            // let index = Array.from(document.querySelectorAll("td > button.btn.btn-info")).indexOf(this);
+
+            // tdName.innerHTML = products[index].Name;
+            // tdPrice.innerHTML = products[index].Price;
+            // tdCity.innerHTML = products[index].City;
+
+            // tr.appendChild(tdName);
+            // tr.appendChild(tdPrice);
+            // tr.appendChild(tdCity);
+
+            // document.getElementById("tbody").appendChild(tr);
+
+           // Presenting all the details in the card format
+            let div = document.createElement("div");
+            let index = Array.from(document.querySelectorAll("td > button.btn.btn-info")).indexOf(this);
+            div.className = "card m-2 p-2";
+            div.innerHTML = `
+              Name : ${products[index].Name}
+            </div>
+            <div class = "card-body">
+              Price : ${products[index].Price}
+            </div>
+            <div class = "card-footer">
+              City : ${products[index].City}
+            </div>
+            `;
+            document.getElementById("catalog").appendChild(div);
+          };
+
+          btnDelete.onclick = function(){
+            let index = Array.from(document.querySelectorAll("td > button.btn.btn-danger")).indexOf(this);
+            products.splice(index,1);
+            LoadProducts();
+          }
+
+          tRow.appendChild(tName);
+          tRow.appendChild(tPrice);
+          tRow.appendChild(tCity);
+          tRow.appendChild(tDetails);
+          tRow.appendChild(tDelete);
+
+          document.querySelector("tbody").appendChild(tRow);
+        }
+      }
+
+      function bodyload() {
+        LoadProducts();
+      }
+
+      function AddClick() {
+        product = {
+          Name: document.getElementById("txtName").value,
+          Price: document.getElementById("txtPrice").value,
+          City: document.getElementById("lstCities").value,
+        };
+        products.push(product);
+        LoadProducts();
+        document.getElementById("txtName").value = "";
+        document.getElementById("txtPrice").value = "";
+      }
+
+      function InfoClick(item) {}
+    </script>
+  </head>
+  <body onload="bodyload()" class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <div>
+          <h3>Add New Product</h3>
+          <dl>
+            <dt>Name</dt>
+            <dd>
+              <input type="text" id="txtName" class="form-control" />
+            </dd>
+            <dt>Price</dt>
+            <dd>
+              <input type="text" id="txtPrice" class="form-control" />
+            </dd>
+            <dt>Shipped To</dt>
+            <dd>
+              <select name="" id="lstCities" class="form-select">
+                <option>Delhi</option>
+                <option>Hyd</option>
+              </select>
+            </dd>
+          </dl>
+          <button
+            type="button"
+            onclick="AddClick()"
+            class="btn btn-primary w-100"
+          >
+            Add Product
+          </button>
+        </div>
+      </div>
+      <div class="col-9">
+        <h2>Product List</h2>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Shipped To</th>
+              <th colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <!-- <div class="modal fade" id="detailsModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>Details</h2>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>City</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div> 
+        Code for Representation as table
+      -->
+      
+       <!-- Code for Representation of all the details in Card Format -->
+        <div class="modal fade" id = "detailsModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>Details</h2>
+                <button class="btn btn-close" data-bs-dismiss = "modal"></button>
+              </div>
+              <div class="modal-body">
+                  <div
+                  class="d-flex flex-wrap overflow-auto"
+                  id="catalog"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  </body>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String</title>
+    <script type = "text/javascript">
+        function VerifyEmail(){
+            var email = document.getElementById("Email").value;
+            var error = document.getElementById("error");
+            const index = email.indexOf('@');
+            if(index != -1){
+                error.innerHTML = "Valid Email Id".fontcolor('green');
+            }else {
+                error.innerHTML = "Please Enter a Valid Email Id".fontcolor('red');
+            }
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>Your Email</legend>
+        <input type="text" onblur = "VerifyEmail()" name="" id="Email">
+        <div id="error"></div>
+    </fieldset>
+</body>
+</html>

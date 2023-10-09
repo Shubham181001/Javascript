@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample</title>
+    <script type = "text/javascript">
+        function SentenceCase(string){
+            var firstChar = string.charAt(0);
+            var restChar = string.substring(1);
+            var sentence = firstChar.toUpperCase() + restChar.toLowerCase();
+            return sentence;
+        }
+        var message = "hello wHaT iS YoUR nAmE !!";
+        document.write(SentenceCase(message));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array of Objects</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script type = "text/javascript">
+        function bodyload(){
+           fetch("../data/products.json").then(function(response){
+            return response.json();
+           }).then(function(data){
+            for(let item of data){
+                const tableRow = document.createElement("tr");
+                const tableName = document.createElement("td");
+                const tablePrice = document.createElement("td");
+                const tablePhoto = document.createElement("td");
+
+                tableName.innerHTML = item.Name;
+                tablePrice.innerHTML = item.Price;
+                const img = document.createElement("img");
+                img.width = "100";
+                img.height = "100";
+                img.src = item.Photo;
+
+                tablePhoto.appendChild(img);
+                tableRow.appendChild(tableName); 
+                tableRow.appendChild(tablePrice); 
+                tableRow.appendChild(tablePhoto); 
+                document.querySelector("tbody").appendChild(tableRow);
+            }
+           })
+        }
+    </script>
+</head>
+<body onload = "bodyload()" class = "container-fluid">
+    <h2>Products Table</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</body>
+</html>

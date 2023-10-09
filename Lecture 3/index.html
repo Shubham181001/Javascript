@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <script>
+        function bodyload(){
+            pic.src = "nature.webp";
+            // btnRegister.value = "Register"; // It won't work because it is a child of form and you can not access child without referring to its parent.
+            frmRegister.btnRegister.value = "Register";
+            frmLogin.btnLogin.value = "Login";
+        }
+    </script>
+</head>
+<body onload = "bodyload()">
+    <div>
+        <img width="100" name = "pic" height = "100" border = "1">
+    </div>
+    <div>
+        <form name = "frmRegister" action="">
+            <h3>Register</h3>
+            User Name: <input type="text" name="" id=""> <input name = "btnRegister" type="button" value="">
+        </form>
+    </div>
+    <div>
+        <form name = "frmLogin" action="">
+            <h3>Login</h3>
+            Email: <input type="email" name="" id=""> <input name = "btnLogin" type="button" value="">
+        </form>
+    </div>
+</body>
+</html>

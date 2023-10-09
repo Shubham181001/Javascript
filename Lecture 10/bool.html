@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolean</title>
+    <script type = "text/javascript">
+        function VerifyUserName(){
+            const username = document.getElementById("UserName").value;
+            var password = document.getElementById("Password");
+            if(username == ""){
+                password.disabled = true;
+            }else{
+                password.disabled = false;
+            }
+        }
+
+        function VerifyPassword(){
+            const passValue = document.getElementById("Password").value;
+            const btn = document.getElementById("btnLogin");
+            if(passValue != "admin"){
+                btn.disabled = true;
+            }else{
+                btn.disabled = false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>Login</legend>
+        <dl>
+            <dt>User Name</dt>
+            <dd><input type="text" onblur = "VerifyUserName()" name="" id="UserName"></dd>
+            <dt>Password</dt>
+            <dd><input type="password" onblur = "VerifyPassword()" disabled name="" id="Password"></dd>
+        </dl>
+        <button disabled id="btnLogin">Login</button>
+    </fieldset>
+</body>
+</html>

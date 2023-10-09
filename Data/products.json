@@ -1,0 +1,12 @@
+[
+    {
+        "Name" : "Master Card",
+        "Price" : 4500.33,
+        "Photo" : "../public/images/master_card.webp"
+    },
+    {
+        "Name" : "Visa Card",
+        "Price" : 7500.44,
+        "Photo" : "../public/images/visa_card.jpg"
+    }
+]

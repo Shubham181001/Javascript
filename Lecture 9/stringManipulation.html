@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Demo</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script type = "text/javascript">
+        function VerifyCard(){
+            var txtCard = document.getElementById("txtCard").value;
+            var pic = document.getElementById("pic");
+            if(txtCard.startsWith("4444")){
+                pic.src = "../public/images/master_card.webp";
+            }else{
+                pic.src = "../public/images/visa_card.jpg";
+            }
+        }
+
+        function VerifyEmail(){
+            var email = document.getElementById("txtEmail").value;
+            var error = document.getElementById("error");
+            if(email.endsWith("gmail.com")){
+                error.innerHTML = "Verified".fontcolor('green');
+            }else{
+                error.innerHTML = "Please Enter a valid Gmail account".fontcolor('red');
+            }
+        }
+    </script>
+</head>
+<body class = "container-fluid">
+    <h2>Verify Card</h2>
+    <div class="input-group">
+        <input  onkeyup = "VerifyCard()" type="text" class = "form-control" name="" id="txtCard">
+        <span class="input-group-text">
+            <img alt = "" id="pic" width = "80" height = "50">
+        </span>
+    </div>
+    <h2>Verify Gmail</h2>
+    <div>
+        <input type="text" onblur = "VerifyEmail()" class = "form-control" name="" id="txtEmail">
+        <div id="error"></div>
+    </div>
+</body>
+</html>

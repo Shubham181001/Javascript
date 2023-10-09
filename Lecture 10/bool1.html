@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolean</title>
+    <script type = "text/javascript">
+        function VerifyUserName(){
+            const username = document.getElementById("UserName").value;
+            var password = document.getElementById("Password");
+            const passcontainer = document.getElementById("password-container");
+            if(username == ""){
+                password.disabled = true;
+                passcontainer.style.display = "none";
+            }else{
+                password.disabled = false;
+                passcontainer.style.display = "block";
+            }
+        }
+
+        function VerifyPassword(){
+            const passValue = document.getElementById("Password").value;
+            const btncontainer = document.getElementById("buttonContainer");
+            const btn = document.getElementById("btnLogin");
+            if(passValue != "admin"){
+                btn.disabled = true;
+                btncontainer.style.display = "none";
+            }else{
+                btn.disabled = false;
+                btncontainer.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>Login</legend>
+        <dl>
+            <dt>User Name</dt>
+            <dd><input type="text" onblur = "VerifyUserName()" name="" id="UserName"></dd>
+            <div id="password-container" style = "display: none;">
+                <dt>Password</dt>
+                <dd><input type="password" onblur = "VerifyPassword()" disabled name="" id="Password"></dd>
+            </div>
+        </dl>
+        <div id="buttonContainer" style = "display: none">
+            <button disabled id="btnLogin">Login</button>
+        </div>
+    </fieldset>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type = "text/javascript">
+        var categories = [];
+        categories["0"] = "Electronics";
+        categories[1] = 10;
+        categories["2"] = true; // [value] value written inside the square braces for accessing the value present at that memory location is accessed using property and not index, they both are different things. NOTE : property is of type string and not number.
+        for(var property in categories){
+            document.write(`[${property}] - ${typeof property} : ${categories[property]} (${typeof categories[property]})<br>`);
+        }
+
+        // An Array in javascript can contain any type of value be it a variable, a value, a function, an object or another array.
+        const values = [10, "John", true, ["Hyd", "Delhi"], function(){
+            document.write("function in Array...")
+        }];
+
+        document.write(values[3][1] + "<br>"); // How to Access the value "Delhi";
+
+        //How to run the function written inside the array ?
+        values[4]();
+        document.write("<br>");
+
+        // NOTE : If you are defining a function inside an array it must be anonymous type i.e. without name.
+
+        const [id, name, stock, cities, print] = values; 
+        // Above mentioned code is the example of the array destructuring.
+        // Each property value of the array is individually stored. Now you can access them independently.
+        print();
+
+        // For reading all the values of the array we can use the in built method toString(). It prints all the values separated with delimeter (comma(,)).
+
+        document.write("<br>" + values.toString());
+
+        // Another alternative for reading the values of the array is, you can use join() which uses custom delimeter(separator). It will print using that separator and not the always used comma.
+
+        document.write("<br>" + categories.join('/'));
+
+        // Another way of reading is by using map(), it is an iterator that reads every element from the array and presents in the UI.
+
+        values.map(function(category){
+            document.write(`<li>${category}</li>`);
+        })
+
+        //User can also read the values of the array using for...in statement, which returns all properties
+
+        for(var item in categories){
+            document.write(`${categories[item]} <br>`);
+        }
+
+        // Here item is not reading the values inside the array categories. But it is reading the property of the array categories, that will be used to access the values of the array.
+
+        // for...in is used for reading all the properties.
+        // while for...of is used for reading all the elements or all the values of the array.
+
+        for(let value of categories){
+            document.write(value + "<br>");
+        }
+
+        // Another way of doing this is that you can use find() method, which can search and return only the value that matches your condition. It returns single first value that matches your condition.
+
+        const sales = [45000, 66000, 62000, 24000, 56300];
+        const val = sales.find(function(value){
+            return value >= 50000;
+        })
+        document.write(val + "<br>");
+
+        // You can also use the filter() method, but unlike find() method, it returns all the values that matches the given condition.
+
+        const sale = [45000, 66000, 62000, 24000, 56300];
+        const valu = sales.filter(function(value){
+            return value >= 50000;
+        })
+        document.write(valu + "<br>");
+
+        //You can also use "for" loop
+
+        for(let inc = 0; inc < categories.length; inc++){
+            document.write(categories[inc] + "<br>");
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

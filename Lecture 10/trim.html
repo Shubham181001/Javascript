@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trim</title>
+    <script type = "text/javascript">
+        function VerifyPassword(){
+            var password = document.getElementById("Password").value;
+            if(password.trim() == "admin"){
+                document.write("Login Success....");
+            }else{
+                document.write("You are not Authorized to enter");
+            }
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>Your Password</legend>
+        <input type="text" name="" id="Password">
+        <button onclick = "VerifyPassword()">Submit</button>
+    </fieldset>
+</body>
+</html>

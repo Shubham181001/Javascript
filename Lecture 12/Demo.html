@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <script type = "text/javascript">
+        function btnClick(){
+            const img = document.createElement("img");
+            img.height = "100";
+            img.width = "100";
+            img.src = "../public/images/master_card.webp";
+            document.getElementById("container").appendChild(img);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <button onclick = "btnClick()">Create Image</button>
+    </div>
+    <div id="container"></div>
+</body>
+</html>

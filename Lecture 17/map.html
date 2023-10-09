@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type = "text/javascript">
+        let topics = new Map();
+        topics.set("HTML", "It is a markup language");
+        // set() method in map is used to store the key value pair.
+        topics.set(1, "CSS Style");
+        // get() method is used to get the value of the specified key.
+        document.write(topics.get(1) + "<br>");
+        document.write(topics.get("HTML"));
+        // size property on any map variable provides the total number of key value pair in that map.
+        document.write("<br>" +topics.size +"<br>");
+        //keys() method is a collection that contains all the keys of the map
+        for(let item of topics.keys()){
+            document.write(item + "<br>");
+        }
+        //values() is also a collection similar to keys() but it contains all the values that are stored inside the map.
+
+        for(let item of topics.values()){
+            document.write(item + "<br>");
+        }
+        // entries() method is a collection that is a combination of both keys() and values() method i.e. it contains both key and value pair. so, it retuns both key and value that are stored inside the map.
+        for(let item of topics.entries()){
+            document.write(item + "<br>");
+        }
+
+        // has() method takes key as a parameter and checks the key that user passed as parameter and returns true if the key is present in the map and returns false if the key is not present in the map.
+
+        document.write(topics.has(1) + "<br>");
+        // delete() method takes any key as a parameter and delete the record corresponding to that key i.e. it deletes the specified key and the value associated with it.
+        topics.delete(1);
+        for(let item of topics.entries()){
+            document.write(item + "<br>");
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

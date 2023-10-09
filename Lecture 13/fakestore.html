@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakeStore</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script type = "text/javascript">
+        function LoadProduct(id){
+            fetch(`http://fakestoreapi.com/products/${id}`).then(function(response){
+                return response.json();
+            }).then(function(data){
+                document.getElementById("img").src = data.image;
+                document.getElementById("title").innerHTML = data.title;
+                document.getElementById("price").innerHTML = data.price;
+            })
+        }
+        function bodyload(){
+            LoadProduct(1);
+        }
+        let productId = 1;
+        function prevClick(){
+            if(productId > 1){
+                productId--;
+            }else{
+                productId = 20;
+            }
+            LoadProduct(productId);
+        }
+        function nextClick(){
+            if(productId < 20){
+                productId++;
+            }else{
+                productId = 1;
+            }
+            LoadProduct(productId);
+        }
+    </script>
+</head>
+<body onload = "bodyload()" class = "container-fluid">
+    <div class="card mt-3 p-2" style = "width: 200px;">
+        <img id = "img" height = "170px" src="" alt="" class="card-img-top">
+        <div class="card-header mt-3" style = "height: 180px">
+            <p id = "title"></p>
+        </div>
+        <div class = "card-body">
+            <p id = "price"></p>
+        </div>
+        <div class="card-footer mt-3">
+            <button onclick = "prevClick()"><</button>
+            <button onclick = "nextClick()">></button>
+        </div>
+    </div>
+</body>
+</html>

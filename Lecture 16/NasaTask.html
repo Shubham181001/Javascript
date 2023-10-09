@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Rover</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script type = "text/javascript">
+        function LoadPhotos(){
+            fetch("../Data/photos.json").then(function(response){
+                return response.json();
+            }).then(function(data){
+                for(let item of data.photos){
+                    let div = document.createElement("div");
+                    div.className = "card m-2 p-2";
+                    div.style.width = "250px";
+                    div.innerHTML = `
+                        <img src = ${item.img_src} height = "150" class = "card-img-top">
+                        <div class = "card-header">
+                            <h2>${item.id}</h2>
+                        </div>
+                        <div class = "card-body">
+                            <div>
+                                <h3>Camera Name</h3>
+                                <p>${item.camera.full_name}</p>
+                            </div>
+                            <div>
+                                <h3>Rover Name</h3>
+                                <p>${item.rover.name}</p>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById("mars-photos").appendChild(div);
+                }
+                
+            })
+        }
+        function bodyload(){
+            LoadPhotos();
+        }
+    </script>
+</head>
+<body onload = "bodyload()" class = "container-fluid p-0 m-0">
+    <header class="bg-dark text-center text-white p-2">
+        <h1>Mars Rover Photos</h1>
+    </header>
+    <div class="d-flex justify-content-evenly flex-wrap overflow-auto mt-2" id = "mars-photos"></div>
+    <script src = "../node_modules/jquery/dist/jquery.js"></script>
+    <script src = "../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

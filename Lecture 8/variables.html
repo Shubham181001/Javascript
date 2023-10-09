@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables</title>
+    <script type = "text/javascript">
+        function VerifyUser(){
+            var username = document.getElementById("UserName").value;
+            var usererror = document.getElementById("UserError");
+            if(username == ""){
+                usererror.innerHTML = "User Name Required".fontcolor('red').italics();
+            }else{
+                usererror.innerHTML = "User Verified".fontcolor('green').bold();
+            }
+        }
+
+        function VerifyName(){
+            var username = document.getElementById("UserName").value;
+            var usererror = document.getElementById("UserError");
+            if(username != ""){
+                usererror.innerHTML = "User Verified".fontcolor('green').bold();
+            }else{
+                usererror.innerHTML = "User Name Required".fontcolor('red').italics();
+            }
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>User Name</dt>
+        <dd>
+            <input type="text" onblur = "VerifyName()" id = "UserName">
+        </dd>
+        <dd id = "UserError"></dd>
+    </dl>
+    <button onclick = "VerifyUser()">Register</button>
+</body>
+</html>

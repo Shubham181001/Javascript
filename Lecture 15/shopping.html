@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping | Fakestore</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <script type="text/javascript">
+      function LoadCategories() {
+        fetch("http://fakestoreapi.com/products/categories")
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (categories) {
+            categories.unshift("all");
+            for (let category of categories) {
+              let option = document.createElement("option");
+              option.text = category.toUpperCase();
+              option.value = category.toUpperCase();
+              document.getElementById("lstCategories").appendChild(option);
+            }
+          });
+      }
+
+      function LoadProducts(url) {
+        document.getElementById("catalog").innerHTML = "";
+        fetch(url)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            for (let item of data) {
+              let div = document.createElement("div");
+              div.className = "card m-2 p-2";
+              div.style.width = "200px";
+              div.innerHTML = `
+                    <img src = ${item.image} height = "150" class = "card-img-top mb-3">
+                    <div class = "card-header" style = "height: 180px">
+                        <p>${item.title}</p>
+                    </div>
+                    <div class = "card-body">
+                        <h3>$${item.price}</h3>
+                    </div>
+                    <div class = "card-footer">
+                        <button onclick = "addToCart(${item.id})" class = "btn btn-danger w-100">
+                            <span class = "bi bi-cart4"></span> Add to Cart
+                        </button>
+                    </div>
+                    `;
+              document.getElementById("catalog").appendChild(div);
+            }
+          });
+      }
+
+      function bodyload() {
+        LoadCategories();
+        LoadProducts("http://fakestoreapi.com/products");
+        getCartItemsCount();
+      }
+
+      function categoryChange() {
+        var category = document.getElementById("lstCategories").value;
+        if (category == "ALL") {
+          LoadProducts("http://fakestoreapi.com/products");
+        } else {
+          LoadProducts(
+            `http://fakestoreapi.com/products/category/${category.toLowerCase()}`
+          );
+        }
+      }
+
+      const cartItems = [];
+      function getCartItemsCount() {
+        document.getElementById("lblCount").innerHTML = cartItems.length;
+      }
+
+      function addToCart(id) {
+        fetch(`http://fakestoreapi.com/products/${id}`)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (product) {
+            cartItems.push(product);
+            getCartItemsCount();
+          });
+      }
+
+      let total = 0;
+      function ShowCart() {
+        document.querySelector("tbody").innerHTML = "";
+        for (let item of cartItems) {
+          let tRow = document.createElement("tr");
+          let tTitle = document.createElement("td");
+          let tPrice = document.createElement("td");
+          let tPreview = document.createElement("td");
+          let tRemove = document.createElement("td");
+
+          tTitle.innerHTML = item.title;
+          tPrice.innerHTML = item.price;
+          let pic = document.createElement("img");
+          pic.src = item.image;
+          pic.width = "50";
+          pic.height = "50";
+          tPreview.appendChild(pic);
+
+          tRemove.innerHTML = `
+            <button onclick = "RemoveClick(${item.id})" class = "btn btn-outline-danger">
+              <span class = "bi bi-trash2-fill"></span>
+            </button>
+          `;
+
+          tRow.appendChild(tTitle);
+          tRow.appendChild(tPreview);
+          tRow.appendChild(tPrice);
+          tRow.appendChild(tRemove);
+
+          document.querySelector("tbody").appendChild(tRow);
+          total += item.price;
+        }
+        document.getElementById("total").innerHTML = total;
+      }
+
+      function RemoveAllClick() {
+        document.querySelector("tbody").innerHTML = "";
+        total = 0;
+        document.getElementById("total").innerHTML = total;
+      }
+
+      function RemoveClick(id) {
+        fetch(`http://fakestoreapi.com/products/${id}`)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (product) {
+            total = total - product.price;
+            const index = categories.indexOf(product);
+            categories.splice(index, 1);
+          });
+      }
+    </script>
+  </head>
+  <body onload="bodyload()" class="container-fluid">
+    <header class="bg-danger text-center text-white p-2">
+      <h1><span class="bi bi-cart3"></span>Fakestore Shopping</h1>
+    </header>
+    <section class="row mt-3">
+      <div class="col-3">
+        <div>
+          <label class="form-label">Select Category</label>
+          <div>
+            <select
+              onchange="categoryChange()"
+              class="form-select"
+              name=""
+              id="lstCategories"
+            ></select>
+          </div>
+        </div>
+      </div>
+      <div class="col-7">
+        <div
+          class="d-flex flex-wrap overflow-auto"
+          style="height: 650px"
+          id="catalog"
+        ></div>
+      </div>
+      <div class="col-2">
+        <button
+          onclick="ShowCart()"
+          data-bs-target="#cart"
+          data-bs-toggle="modal"
+          type="button"
+          class="btn btn-danger w-100"
+        >
+          <span class="bi bi-cart4"></span> [<span id="lblCount"></span>] Your
+          Cart Items
+        </button>
+        <div class="modal fade" id="cart">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Your Cart Items</h3>
+                <button data-bs-dismiss="modal" class="btn-close"></button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Preview</th>
+                      <th>Price</th>
+                      <th>
+                        <button
+                          onclick="RemoveAllClick()"
+                          type="button"
+                          class="btn btn-outline-danger"
+                        >
+                          <span class="bi bi-trash-fill text-danger"></span>
+                        </button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                  <tfoot>
+                    <tr>
+                      <td>Total</td>
+                      <td></td>
+                      <td id="total"></td>
+                      <td></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

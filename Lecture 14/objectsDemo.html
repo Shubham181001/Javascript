@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Demo</title>
+    <script type = "text/javascript">
+        const product = {
+            "Name" : "Samsung TV",
+            "Price" : 45600.44,
+            "Qty" : 2,
+            "Total" : function() {
+                return this.Qty * this.Price;
+            }, 
+            "Print" : function() {
+                document.write(`Name : ${this.Name} <br>Price : ${this.Price}<br>Quantity : ${this.Qty}<br>Total : ${this.Total()}`)
+            }
+        }
+        product.Print();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

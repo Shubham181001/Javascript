@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        form {
+            border: 2px solid gray;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+        }
+    </style>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script type = "text/javascript">
+        function changeMode(){
+            var theme = document.getElementById("theme");
+            if(theme.checked){
+                document.querySelector("form").className = "bg-dark p-3 text-white";
+                document.querySelector("button").className = "btn btn-light w-100";
+            }else {
+                // document.querySelector("form").className = "normal"; One way of doing this.
+
+                // Another way of doing this.
+
+                document.querySelector("form").className = "bg-light p-3 text-dark";
+                document.querySelector("button").className = "btn btn-dark w-100";
+            }
+        }
+    </script>
+</head>
+<body class = "container-fluid">
+    <div class="container">
+        <form action="">
+            <div class="form-switch">
+                <input onchange="changeMode()" type="checkbox" class = "form-check-input" name="" id="theme">Dark Mode
+            </div>
+            <h2>Register</h2>
+            <dl>
+                <dt><label for="UserName">UserName</label></dt>
+                <dd><input type="text" name="" id="UserName"></dd>
+                <dt><label for="Password">Password</label></dt>
+                <dd><input type="password" name="" id="Password"></dd>
+                <dt><label for="Email">Email Address</label></dt>
+                <dd><input type="email" name="" id="Email"></dd>
+            </dl>
+            <button class = "btn btn-dark w-100">Register</button>
+        </form>
+    </div>
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

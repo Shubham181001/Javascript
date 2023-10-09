@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Demo</title>
+    <script type = "text/javascript">
+        var categories = ["All", "Electronics", "Footwear", "Fashion", "Men's Clothing"];
+
+        function LoadCategories(){
+            document.querySelector("ol").innerHTML = "";
+            document.querySelector("select").innerHTML = "";
+            document.querySelector("ul").innerHTML = "";
+            document.querySelector("nav").innerHTML = "";
+            document.querySelector("tbody").innerHTML = "";
+            for(let item of categories){
+            const list = document.createElement("li");
+            list.innerHTML = item;
+            document.querySelector("ol").appendChild(list);
+
+            const option = document.createElement("option");
+            option.innerHTML = item;
+            document.querySelector("select").appendChild(option);
+
+            const tableRow = document.createElement("tr");
+            const tableData = document.createElement("td");
+            tableData.innerHTML = item;
+            tableRow.appendChild(tableData);
+            document.querySelector("tbody").appendChild(tableRow);
+
+            const checkList = document.createElement("li");
+            checkList.innerHTML = `<input type="checkbox" name="" id=""> ${item}`;
+
+            document.querySelector("ul").appendChild(checkList);
+
+            const div = document.createElement("div");
+            div.innerHTML = `<button style = "width: 200px; margin-bottom : 10px">${item}</button>`;
+            document.querySelector("nav").appendChild(div);
+        }
+        }
+       function bodyload(){
+        LoadCategories();
+       }
+
+       function AddClick(){
+        var categoryName = document.getElementById("txtCategory").value;
+        if(categories.indexOf(categoryName) == -1){
+            categories.push(categoryName);
+            alert(`${categoryName} Add to List`);
+            LoadCategories();
+        }
+        else{
+            alert(`${categoryname} Exists`);
+        }
+       }
+
+       function RemoveClick(){
+        var categoryname = document.querySelector("select").value;
+        const index = categories.indexOf(categoryname);
+        const flag = confirm(`Are you sure you want to delete : ${categoryname}`);
+        if(flag){
+            categories.splice(index,1);
+        }
+        LoadCategories();
+       }
+    </script>
+
+    <style>
+        .container{
+            display: flex;
+        }
+        .box{
+            margin-right: 20px;
+        }
+
+        ul {
+            list-style: none;
+            height: 70px;
+            border: 2px solid black;
+            padding: 10px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body onload = "bodyload()">
+    <div style = "margin-bottom: 20px;">
+        New Category: 
+        <input type="text" name="" id="txtCategory">
+        <button onclick = "AddClick()">Add</button>
+    </div>
+    <div class="container">
+        <div class = "box">
+            <h2>Categories List</h2>
+            <ol>
+    
+            </ol>
+        </div>
+        <div class = "box">
+            <h2>Select Category</h2>
+            <select name="" id=""></select>
+            <br><br>
+            <button onclick = "RemoveClick()">Remove</button>
+        </div>
+        <div class="box">
+            <h2>categories Menu</h2>
+            <table border = "1" width = "200"> 
+                <thead>
+                    <tr>
+                        <th>Select Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="box">
+            <h2>Categories Checklist</h2>
+            <ul>
+
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>Nav Buttons</h2>
+            <nav>
+                
+            </nav>
+        </div>
+    </div>
+</body>
+</html>
